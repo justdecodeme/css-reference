@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables | CSS Custom Properties</title>
+    <style>
+        /* 1. defines variables for whole document */
+        :root {
+            --main-bg-color: lightgrey;
+            --main-txt-color: grey;
+            --main-border-color: blue;
+        }
+        body {
+            background-color: var(--main-bg-color);
+            color: var(--main-txt-color);
+        }
+        
+        /* 2. defines variables for header and its child */
+        header {
+            --header-bg-color: aqua;
+            --header-txt-color: orange;
+        }
+        header {
+            background-color: var(--header-bg-color);
+            color: var(--header-txt-color);
+            /* 3. fallback option */
+            margin-bottom: var(--header-mb, 15px);
+            border: 5px solid var(--main-border-color);
+        }
+        header h1 {
+            /* 4. will overwrite the previous value from header */
+            --header-txt-color: green;
+            color: var(--header-txt-color);
+        }
+
+        footer {
+            border: 5px solid var(--main-border-color);
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Variables</h1>
+    <header>
+        <h1>Header</h1>
+    </header>
+    <footer>
+        <h1>Footer</h1>
+    </footer>
+
+    <script>
+        /* 5. get header variable value */
+        const headerBgColor = getComputedStyle(document.querySelector('header'))
+        .getPropertyValue('--header-bg-color');
+        /* 5. get root variable value */
+        const rootBgColor = getComputedStyle(document.documentElement)
+                                .getPropertyValue('--main-bg-color');
+        console.log(headerBgColor, rootBgColor)
+
+        /* 6. set header varialble value */
+        document.querySelector('header').style.setProperty('--header-bg-color', 'yellow');
+        /* 6. set root varialble value */
+        document.documentElement.style.setProperty('--main-border-color', 'black');
+    </script>
+</body>
+</html>
