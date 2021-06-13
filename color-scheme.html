@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+    The page supports both dark and light color schemes,
+    and the page author prefers dark.
+    -->
+    <!-- <meta name="color-scheme" content="dark light">     -->
+
+    <title>Color Scheme</title>
+
+    <style>
+        /*
+        The page supports both dark and light color schemes,
+        and the page author prefers dark.
+        */
+        /* :root {
+            color-scheme: dark light;
+        } */
+
+        /* default theme */
+        body {
+            background-color: white;
+            color: grey;
+        }
+        /* if stystem theme is 'dark' */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: grey;
+                color: yellow;
+            }
+        }
+        /* user selected 'light' theme */
+        [color-scheme="light"] body {
+            background-color: white;
+            color: grey;
+        }
+        /* user selected 'dark' theme */
+        [color-scheme="dark"] body {
+            background-color: darkslategrey;
+            color: white;
+        }
+        /* user selected 'dim' theme */
+        [color-scheme="dim"] body {
+            background-color: grey;
+            color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <h1>Color Scheme</h1>
+
+    <form id="theme-switcher">
+        <div>
+            <input checked type="radio" id="auto" name="theme" value="auto" />
+            <label for="auto">Auto</label>
+        </div>
+        <div>
+            <input type="radio" id="light" name="theme" value="light" />
+            <label for="light">Light</label>
+        </div>
+        <div>
+            <input type="radio" id="dark" name="theme" value="dark" />
+            <label for="dark">Dark</label>
+        </div>
+        <div>
+            <input type="radio" id="dim" name="theme" value="dim" />
+            <label for="dim">Dim</label>
+        </div>
+    </form>
+
+    <script>
+        const switcher = document.querySelector("#theme-switcher");
+        const doc = document.firstElementChild;
+
+        switcher.addEventListener("input", (e) => setTheme(e.target.value));
+
+        const setTheme = (theme) => doc.setAttribute("color-scheme", theme);
+    </script>
+</body>
+</html>
